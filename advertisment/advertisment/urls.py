@@ -19,6 +19,13 @@ from django.contrib import admin
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('app_advertisment.urls'))
+    path('', include('app_advertisment.urls')),
     
 ]
+
+urlpatterns = [
+    path('lesson_4/', admin.site.urls),
+    path('', include('app_lesson_4.urls'))
+    
+]
+
