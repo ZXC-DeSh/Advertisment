@@ -20,12 +20,8 @@ from django.contrib import admin
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('app_advertisment.urls')),
+    path('lesson_4', include('app_lesson_4.urls'))
     
 ]
 
-urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', include('app_lesson_4.urls'))
-    
-]
 
