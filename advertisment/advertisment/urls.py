@@ -24,7 +24,7 @@ urlpatterns = [
 ]
 
 urlpatterns = [
-    path('lesson_4/', admin.site.urls),
+    path('admin/', admin.site.urls),
     path('', include('app_lesson_4.urls'))
     
 ]
