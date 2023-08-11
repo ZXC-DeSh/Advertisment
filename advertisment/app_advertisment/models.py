@@ -41,3 +41,4 @@ class Advertisement(models.Model):
 
     class Meta:
         db_table = "advertisements"
+
