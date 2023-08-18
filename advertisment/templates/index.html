@@ -1,10 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}
-Главная
-{% endblock %}
-
+{% block title %} Главная {% endblock %}
 
 {% block content %}
 <ul class="nav nav-pills sticky-top bg-white nav-fill">
@@ -18,22 +15,22 @@
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="advertisement-post.html">
+    <a class="nav-link" href="{% url 'adv_post' %}">
       <span style="font-weight: bold;">Разместить объявление</span>
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="register.html">
+    <a class="nav-link" href="{% url 'register' %}">
       <span style="font-weight: bold;">Регистрация</span>
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="login.html">
+    <a class="nav-link" href="{% url 'login' %}">
       <span style="font-weight: bold;">Войти</span>
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="profile.html">
+    <a class="nav-link" href="{% url 'profile' %}">
       <span style="font-weight: bold;">Профиль</span>
     </a>
   </li>
@@ -101,7 +98,7 @@
       <div class="row g-0">
         <div class="col-md-4">
           <a href="advertisement.html" class="nav-link">
-            <img src="{% if adv.image %} {{ adv.image.url }} {% endif %}" class="img-fluid rounded-start" alt="Card title">
+            <img src="{% if adv.image %} {{ adv.image.url }} {% else %} {% static 'img/123.png' %} {% endif %}" class="img-fluid rounded-start" alt="Card title">
           </a>
         </div>
         <div class="col-md-8">
