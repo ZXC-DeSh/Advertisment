@@ -1,7 +1,7 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 {% load static %}
 
-{% block title %} Профиль {% endblock %}
+{% block title %} Разместить объявления {% endblock %}
 
 {% block content %}
   <ul class="nav nav-pills sticky-top bg-white nav-fill">
@@ -15,12 +15,12 @@
       </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="{% url 'adv_post' %}">
+      <a class="nav-link active" aria-current="page" href="{% url 'adv_post' %}">
         <span style="font-weight: bold;">Разместить объявление</span>
       </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="{% url 'register' %}">
+      <a class="nav-link" href="register">
         <span style="font-weight: bold;">Регистрация</span>
       </a>
     </li>
@@ -30,19 +30,32 @@
       </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link active" aria-current="page" href="{% url 'profile' %}">
+      <a class="nav-link" href="{% url 'profile' %}">
         <span style="font-weight: bold;">Профиль</span>
       </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="#">
+      <a class="nav-link" href="{% url 'logout' %}">
         <span style="font-weight: bold;">Выйти</span>
       </a>
     </li>
   </ul>
-<div class="col" style="margin: 50px;">
-  <div class="display-2">
-    <span class="badge bg-primary">Сейчас вы находитесь на сайте под ником "username".</span>
+  <div class="row">
+    <div class="col" style="margin: 50px;">
+      <div class="display-2">
+        <span class="badge bg-primary">Сообщите миру об этом в этой форме</span>
+      </div>
+    </div>
   </div>
-</div>
+  <div class="container">
+    <form method="post" enctype="multipart/form-data"> {% csrf_token %}
+      <div class="row mb-3">
+        <div class="col">
+          {{ form.as_p }}
+        <div class="col">
+          <button type="submit" class="btn btn-success">Принять</button>
+        </div>
+      </div>
+    </form>
+  </div>
 {% endblock %}
