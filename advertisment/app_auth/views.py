@@ -11,19 +11,19 @@ def login_view(request):
         if request.user.is_authenticated:
             return redirect(redirect_url)
         else:
-            return render(request, 'app_auth/login.html')
+            return render(request, 'auth/login.html')
     username = request.POST['username']
     password = request.POST['password']
     user = authenticate(request, username=username, password=password)
     if user is not None:
         login(request, user)
         return redirect(redirect_url)
-    return render(request, 'app_auth/login.html')
+    return render(request, 'auth/login.html')
 
 
 @login_required(login_url=reverse_lazy('login'))
 def profile_view(request):
-    return render(request, 'app_auth/profile.html')
+    return render(request, 'auth/profile.html')
 
 
 def logout_view(request):
@@ -44,4 +44,4 @@ def register_view(request):
     context = {
         'form': form
     }
-    return render(request, 'app_auth/register.html', context)
+    return render(request, 'auth/register.html', context)
