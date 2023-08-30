@@ -41,7 +41,7 @@ def advertisement_post(request):
     else:
         form = AdvertisementForm()
     context = {'form': form}
-    return render(request, 'adv/advertisement-post.html', context)
+    return render(request, 'adv/advertisement_post.html', context)
 
 def advertisement_detail(request, pk):
     advertisement = Advertisement.objects.get(id=pk)

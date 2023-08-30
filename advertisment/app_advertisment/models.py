@@ -20,7 +20,7 @@ class Advertisement(models.Model):
     image = models.ImageField('Изображение', upload_to='advertisements/', null=True, blank=True)
 
     def get_absolute_url(self):
-        return reverse('adv_detail', kvargs={'pk': self.pk})
+        return reverse('adv_detail', kwargs={'pk': self.pk})
 
     @admin.display(description='Дата создания')
     def created_date(self):
