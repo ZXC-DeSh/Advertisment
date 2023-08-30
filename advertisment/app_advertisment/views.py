@@ -3,15 +3,30 @@ from .models import Advertisement
 from django.contrib.auth.decorators import login_required
 from .forms import AdvertisementForm
 from django.urls import reverse,reverse_lazy
+from django.contrib.auth import get_user_model
+from django.db.models import Count
 
+User = get_user_model()
 
 def index(request):
-    advertisements = Advertisement.objects.all()
-    context = {'advertisements': advertisements}
+    title = request.GET.get('query')
+    if title:
+        advertisements = Advertisement.objects.filter(title__icontains=title)
+    else:
+        advertisements = Advertisement.objects.all()
+    context = {'advertisements': advertisements, 
+               "title":title,
+               }
     return render(request, 'adv/index.html', context)
 
 def top_sellers(request):
-    return render(request, 'adv/top-sellers.html')
+    users = User.objects.annotate(
+        adv_count = Count('advertisement')
+    ).order_by('-adv_count')
+    context = {
+        'users':users
+    }
+    return render(request, 'adv/top-sellers.html', context)
 
 @login_required(login_url=reverse_lazy('login'))
 def advertisement_post(request):
@@ -25,16 +40,12 @@ def advertisement_post(request):
             return redirect(url)
     else:
         form = AdvertisementForm()
-
-    form = AdvertisementForm()
     context = {'form': form}
-    return render(request, 'adv/advertisement_post.html', context)
+    return render(request, 'adv/advertisement-post.html', context)
 
-def register(request):
-    return render(request, 'auth/register.html')
-
-def login(request):
-    return render(request, 'auth/login.html')
-
-def profile(request):
-    return render(request, 'auth/profile.html')
+def advertisement_detail(request, pk):
+    advertisement = Advertisement.objects.get(id=pk)
+    context = {
+        'advertisement': advertisement
+    }
+    return render(request, 'adv/advertisement.html', context)
